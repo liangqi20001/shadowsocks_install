@@ -139,41 +139,6 @@ pre_install(){
         echo "Error: Your OS is not supported. please change OS to CentOS/Debian/Ubuntu and try again."
         exit 1
     fi
-    # Set ShadowsocksR config password
-    echo "Please input password for ShadowsocksR:"
-    read -p "(Default password: teddysun.com):" shadowsockspwd
-    [ -z "${shadowsockspwd}" ] && shadowsockspwd="teddysun.com"
-    echo
-    echo "---------------------------"
-    echo "password = ${shadowsockspwd}"
-    echo "---------------------------"
-    echo
-    # Set ShadowsocksR config port
-    while true
-    do
-    echo -e "Please input port for ShadowsocksR [1-65535]:"
-    read -p "(Default port: 8989):" shadowsocksport
-    [ -z "${shadowsocksport}" ] && shadowsocksport="8989"
-    expr ${shadowsocksport} + 0 &>/dev/null
-    if [ $? -eq 0 ]; then
-        if [ ${shadowsocksport} -ge 1 ] && [ ${shadowsocksport} -le 65535 ]; then
-            echo
-            echo "---------------------------"
-            echo "port = ${shadowsocksport}"
-            echo "---------------------------"
-            echo
-            break
-        else
-            echo "Input error, please input correct number"
-        fi
-    else
-        echo "Input error, please input correct number"
-    fi
-    done
-
-    echo
-    echo "Press any key to start...or Press Ctrl+C to cancel"
-    char=`get_char`
     # Install necessary dependencies
     if check_sys packageManager yum; then
         yum install -y unzip openssl-devel gcc swig python python-devel python-setuptools autoconf libtool libevent automake make curl curl-devel zlib-devel perl perl-devel cpio expat-devel gettext-devel
@@ -255,10 +220,10 @@ config_shadowsocks(){
 {
     "server":"0.0.0.0",
     "server_ipv6":"::",
-    "server_port":${shadowsocksport},
+    "server_port":8989,
     "local_address":"127.0.0.1",
     "local_port":1080,
-    "password":"${shadowsockspwd}",
+    "password":"20020001",
     "timeout":120,
     "method":"aes-256-cfb",
     "protocol":"origin",
